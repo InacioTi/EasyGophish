@@ -189,16 +189,22 @@ fi
 
 #RECOMPILAR
 cd /opt/gophish
-find . -type f -exec sed -i.bak 's/X-Contact/X-Contact/g' {} +
+sed -i 's/X-Gophish-Contact/X-Contact/g' models/email_request_test.go
 sleep 4
-find . -type f -exec sed -i.bak 's/X-Signature/X-Signature/g' {} +
+sed -i 's/X-Gophish-Contact/X-Contact/g' models/maillog.go
+sleep 4
+sed -i 's/X-Gophish-Contact/X-Contact/g' models/maillog_test.go
+sleep 4
+sed -i 's/X-Gophish-Contact/X-Contact/g' models/email_request.go
+sleep 4
+sed -i 's/X-Gophish-Signature/X-Signature/g' webhook/webhook.go
 sleep 4
 sed -i 's/const ServerName = "gophish"/const ServerName = "IGNORE"/' config/config.go
 sleep 4
 sed -i 's/const RecipientParameter = "rid"/const RecipientParameter = "search"/g' models/campaign.go
 sleep 4
 go build -v
-sleep 4
+sleep 15
 
 echo "${blue}${bold}[*] Alterando config.json...${clear}"
 
@@ -316,12 +322,12 @@ certbot certonly --standalone -d $DM
 
 sleep 4
 
-cp /etc/letsencrypt/live/$DM/fullchain.pem /opt/gophish/$DM.cert &&
-cp /etc/letsencrypt/live/$DM/privkey.pem /opt/gophish/$DM.key &&
-cp /etc/letsencrypt/live/$DM/fullchain.pem /etc/ssl/certs/fullchain.pem &&
-cp /etc/letsencrypt/live/$DM/privkey.pem /etc/ssl/private/privkey.pem &&
-sed -i "s/example.crt/"$DM".cert/g" /opt/gophish/config.json &&
-sed -i "s/example.key/"$DM".key/g" /opt/gophish/config.json &&
+cp /etc/letsencrypt/live/$DM/fullchain.pem /opt/gophish/$DM.cert 
+cp /etc/letsencrypt/live/$DM/privkey.pem /opt/gophish/$DM.key 
+cp /etc/letsencrypt/live/$DM/fullchain.pem /etc/ssl/certs/fullchain.pem 
+cp /etc/letsencrypt/live/$DM/privkey.pem /etc/ssl/private/privkey.pem 
+sed -i "s/example.crt/"$DM".crt/g" /opt/gophish/config.json 
+sed -i "s/example.key/"$DM".key/g" /opt/gophish/config.json 
 chown -R gophish:gophish /opt/gophish/$DM.key /opt/gophish/$DM.cert
 echo
 echo "${green}${bold}[+] Verifique o certificado em: https://$DM${clear}"
