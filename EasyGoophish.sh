@@ -213,8 +213,8 @@ sleep 2
 
 #criando servico gophish
 echo "${blue}${bold}[*] Criando servico gophish...${clear}"
-wget https://raw.githubusercontent.com/InacioTi/Gophish/main/service/gophish.service -P /etc/systemd/system/ >/dev/null 2>&1 &&
-wget https://raw.githubusercontent.com/InacioTi/Gophish/main/service/gophish.sh -P /root/ >/dev/null 2>&1 &&
+wget https://raw.githubusercontent.com/InacioTi/EasyGophish/main/service/gophish.service -P /etc/systemd/system/ >/dev/null 2>&1 &&
+wget https://raw.githubusercontent.com/InacioTi/EasyGophish/main/service/gophish.sh -P /root/ >/dev/null 2>&1 &&
 setcap cap_net_bind_service=+ep /opt/gophish/gophish &&
 systemctl daemon-reload
 systemctl start gophish &&
@@ -364,13 +364,13 @@ echo "${green}${bold}[+] Verifique o arquivo mail.txt contendo o DKMI ${clear}"
 
 #instalando apache2
 installApache(){
-wget https://raw.githubusercontent.com/InacioTi/Gophish/main/apache2/000-default.conf -P /etc/apache2/sites-available/ >/dev/null 2>&1
+wget https://raw.githubusercontent.com/InacioTi/EasyGophish/main/apache2/000-default.conf -P /etc/apache2/sites-available/ >/dev/null 2>&1
 sed -i "s/example.today/"$DM"/g" /etc/apache2/sites-available/000-default.conf
 sudo a2ensite 000-default.conf
 sudo a2dissite 000-default-le-ssl.conf
 sudo a2dissite default-ssl.conf
 
-wget https://raw.githubusercontent.com/InacioTi/Gophish/main/apache2/ports.conf -P /etc/apache2/ >/dev/null 2>&1
+wget https://raw.githubusercontent.com/InacioTi/EasyGophish/main/apache2/ports.conf -P /etc/apache2/ >/dev/null 2>&1
 echo "ServerSignature Off" >> /etc/apache2/apache2.conf
 echo "ServerTokens Prod" >> /etc/apache2/apache2.conf
 sleep 1
