@@ -15,7 +15,7 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 ## 💻 Pré-requisitos
 
 
-## 🚀 Instalando <Nome_Projeto>
+## 🚀 Instalando EasyGophish
 
 Para instalar o EasyGophish, siga estas etapas:
 
@@ -27,9 +27,9 @@ chmod +x EasyGophish.sh
 ```
 
 
-## ☕ Usando <Nome_Projeto>
+## ☕ Usando EasyGophish
 
-Para usar <Nome_Projeto>, siga estas etapas:
+Para usar EasyGophish, siga estas etapas:
 
 ```
 ./EasyGophish.sh -d example.com -t 192.168.56.111
